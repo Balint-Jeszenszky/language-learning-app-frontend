@@ -1,0 +1,13 @@
+<div class="m-05">
+  <form (ngSubmit)="onLogin()">
+      <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" name="email" [(ngModel)]="email">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="password">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Login</button>
+  </form>
+</div>

@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 const material = [
-  MatChipsModule,
+  MatTabsModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
 ];
 
 @NgModule({
