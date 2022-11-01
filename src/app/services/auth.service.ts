@@ -42,12 +42,13 @@ export class AuthService {
   login(email: string, password: string): Observable<LoginResponse> {
     const response = this.http.post<LoginResponse>('/api/auth/login', { email, password });
 
-    response.subscribe(res => {
-      this.setTokens({ accessToken: res.accessToken, refreshToken: res.refreshToken });
-      this.router.navigate(['/']);
+    return new Observable<LoginResponse>(subscriber => {
+      response.subscribe(res => {
+        this.setTokens({ accessToken: res.accessToken, refreshToken: res.refreshToken });
+        this.router.navigate(['/']);
+        subscriber.next(res);
+      });
     });
-
-    return response;
   }
 
   isLoggedIn(): Observable<boolean> {
@@ -62,15 +63,13 @@ export class AuthService {
     return this.tokens?.accessToken;
   }
 
-  logout(): Observable<void> {
+  logout(): void {
     const refreshToken = this.tokens?.refreshToken;
-
     this.loggedIn.next(false);
     localStorage.removeItem(TOKEN_KEY);
     this.tokens = undefined;
     this.router.navigate(['/auth']);
-
-    return this.http.post<void>('/api/auth/logout', { refreshToken });
+    this.http.post<void>('/api/auth/logout', { refreshToken }).subscribe();
   }
 
   private setTokens(tokens: Tokens): void {
