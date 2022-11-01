@@ -62,11 +62,15 @@ export class AuthService {
     return this.tokens?.accessToken;
   }
 
-  logout(): void {
+  logout(): Observable<void> {
+    const refreshToken = this.tokens?.refreshToken;
+
     this.loggedIn.next(false);
     localStorage.removeItem(TOKEN_KEY);
     this.tokens = undefined;
     this.router.navigate(['/auth']);
+
+    return this.http.post<void>('/api/auth/logout', { refreshToken });
   }
 
   private setTokens(tokens: Tokens): void {
@@ -79,7 +83,7 @@ export class AuthService {
   }
 
   private refresh(refreshToken: string): void {
-    this.http.post<LoginResponse>('/api/auth/refresh', { refreshToken }).subscribe({
+    this.http.post<LoginResponse>('/api/auth/login/refresh', { refreshToken }).subscribe({
       next: res => {
         this.setTokens({ accessToken: res.accessToken, refreshToken: res.refreshToken });
       },

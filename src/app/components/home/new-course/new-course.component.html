@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Create new room</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Course name</mat-label>
+    <input matInput [(ngModel)]="name">
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Choose a deadline</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="deadline">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="{ name, deadline }" cdkFocusInitial>Create</button>
+</div>

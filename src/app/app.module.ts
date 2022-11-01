@@ -12,6 +12,9 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { ApiInterceptor } from './services/api-interceptor';
 import { HomeComponent } from './components/home/home.component';
+import { ToolbarComponent } from './components/common/toolbar/toolbar.component';
+import { CourseDetailsComponent } from './components/course/course-details/course-details.component';
+import { NewCourseComponent } from './components/home/new-course/new-course.component';
 
 const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -25,7 +28,10 @@ const API_INTERCEPTOR_PROVIDER: Provider = {
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ToolbarComponent,
+    CourseDetailsComponent,
+    NewCourseComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+<div class="d-flex flex-wrap">
+  <mat-card *ngFor="let wordPair of wordPairs" class="m-1 card">
+      <mat-card-header>
+        <mat-card-title>{{ wordPair.word }} - {{ wordPair.translation }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip *ngFor="let metadata of wordPair.metadata">{{ metadata }}</mat-chip>
+        </mat-chip-list>
+      </mat-card-content>
+    </mat-card>
+</div>

@@ -36,3 +36,35 @@ export type TokenPayload = {
   roles: Role[];
   exp: number;
 }
+
+export type Course = {
+  id: number;
+  name: string;
+  deadline: Date;
+  teacher: {
+    id: number;
+    name: string;
+  };
+}
+
+export type WordPair = {
+  id: number;
+  word: string;
+  translation: string;
+  metadata: string[];
+}
+
+export type CreateCourseRequest = {
+  name: string;
+  deadline?: Date;
+}
+
+export type CreateCourseResponse = {
+  id: number;
+  name: string;
+  deadline?: Date;
+  teacher: {
+    id: number;
+    name: string;
+  }
+}

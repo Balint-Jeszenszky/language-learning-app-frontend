@@ -1,0 +1,6 @@
+<mat-toolbar color="primary">
+  <div class="container w-100 d-flex justify-between">
+    <span>Language learning app</span>
+    <span *ngIf="loggedIn" class="cursor-pointer" (click)="logout()">Logout</span>
+  </div>
+</mat-toolbar>
