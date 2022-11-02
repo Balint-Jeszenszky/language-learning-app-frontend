@@ -19,7 +19,7 @@ export class CourseService {
   }
 
   getCourseDetailsById(id: number): Observable<CourseDetails> {
-    return this.http.get<CourseDetails>(`/api/course/${id}`);
+    return this.http.get<CourseDetails>(`/api/course/teacher/${id}`);
   }
 
   createCourse(payload: CreateCourseRequest): Observable<CreateCourseResponse> {
