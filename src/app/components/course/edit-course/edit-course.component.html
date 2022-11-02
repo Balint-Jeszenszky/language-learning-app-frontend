@@ -1,0 +1,23 @@
+<h1>Edit course</h1>
+<div>
+  <div class="d-flex justify-between flex-wrap">
+    <mat-form-field appearance="fill" class="half-input">
+      <mat-label>Course name</mat-label>
+      <input matInput [(ngModel)]="name">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="half-input">
+      <mat-label>Choose a deadline</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="deadline">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div>
+    <app-chip-input label="Emails" placeholder="New student email..." [data]="studentEmails"></app-chip-input>
+  </div>
+</div>
+<div class="d-flex justify-end">
+  <a mat-raised-button [routerLink]="'/course/' + id" class="mx-05">Cancel</a>
+  <button mat-raised-button color="primary" (click)="saveCourse()">Save</button>
+</div>

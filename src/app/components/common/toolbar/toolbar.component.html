@@ -1,6 +1,9 @@
 <mat-toolbar color="primary">
   <div class="container w-100 d-flex justify-between">
     <span>Language learning app</span>
-    <span *ngIf="loggedIn" class="cursor-pointer" (click)="logout()">Logout</span>
+    <div>
+      <a *ngIf="loggedIn" routerLink="/" class="nav-item">Home</a>
+      <span *ngIf="loggedIn" class="cursor-pointer nav-item" (click)="logout()">Logout</span>
+    </div>
   </div>
 </mat-toolbar>

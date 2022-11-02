@@ -1,0 +1,9 @@
+.half-input {
+  width: 48%;
+}
+
+@media only screen and (max-width: 600px) {
+  .half-input {
+    width: 100%;
+  }
+}

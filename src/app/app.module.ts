@@ -15,6 +15,9 @@ import { HomeComponent } from './components/home/home.component';
 import { ToolbarComponent } from './components/common/toolbar/toolbar.component';
 import { CourseDetailsComponent } from './components/course/course-details/course-details.component';
 import { NewCourseComponent } from './components/home/new-course/new-course.component';
+import { EditCourseComponent } from './components/course/edit-course/edit-course.component';
+import { EditWordsComponent } from './components/course/edit-words/edit-words.component';
+import { ChipInputComponent } from './components/common/chip-input/chip-input.component';
 
 const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -31,7 +34,10 @@ const API_INTERCEPTOR_PROVIDER: Provider = {
     HomeComponent,
     ToolbarComponent,
     CourseDetailsComponent,
-    NewCourseComponent
+    NewCourseComponent,
+    EditCourseComponent,
+    EditWordsComponent,
+    ChipInputComponent
   ],
   imports: [
     BrowserModule,

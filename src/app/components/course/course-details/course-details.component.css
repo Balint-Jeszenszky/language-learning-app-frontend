@@ -2,3 +2,10 @@
   max-width: 235px;
   min-width: 235px;
 }
+
+.no-data {
+  background-color: #ff8484;
+  border: 2px solid #ff5454;
+  border-radius: 4px;
+  padding: 1rem;
+}

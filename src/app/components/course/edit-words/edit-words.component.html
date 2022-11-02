@@ -1,0 +1,31 @@
+<h1>Edit words</h1>
+<div *ngFor="let wordPair of wordPairs">
+  <div class="d-flex justify-between flex-wrap">
+    <mat-form-field appearance="fill" class="half-input">
+      <mat-label>Word</mat-label>
+      <input matInput [(ngModel)]="wordPair.word">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="half-input">
+      <mat-label>Translation</mat-label>
+      <input matInput [(ngModel)]="wordPair.translation">
+    </mat-form-field>
+  </div>
+  <div>
+    <app-chip-input label="Metadata" placeholder="New metadata..." [data]="wordPair.metadata"></app-chip-input>
+  </div>
+  <div class="text-right">
+    <button mat-icon-button color="warn" aria-label="Remove word" (click)="remove(wordPair)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <mat-divider class="p-1"></mat-divider>
+</div>
+<div class="text-right mb-2">
+  <button mat-button color="primary" aria-label="Add new word" (click)="add()">
+    Add new word <mat-icon>add_box</mat-icon>
+  </button>
+</div>
+<div class="d-flex justify-end">
+  <a mat-raised-button [routerLink]="'/course/' + id" class="mx-05">Cancel</a>
+  <button mat-raised-button color="primary" (click)="saveWordPairs()">Save</button>
+</div>

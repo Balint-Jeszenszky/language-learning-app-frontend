@@ -8,8 +8,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 0.5rem;
 }
 
+.mx-05 {
+  margin: 0 0.5rem !important;
+}
+
 .m-1 {
   margin: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+.p-1 {
+  padding: 1rem;
 }
 
 .d-flex {
@@ -22,6 +34,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .container {
