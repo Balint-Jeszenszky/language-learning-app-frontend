@@ -43,10 +43,13 @@ export class AuthService {
     const response = this.http.post<LoginResponse>('/api/auth/login', { email, password });
 
     return new Observable<LoginResponse>(subscriber => {
-      response.subscribe(res => {
-        this.setTokens({ accessToken: res.accessToken, refreshToken: res.refreshToken });
-        this.router.navigate(['/']);
-        subscriber.next(res);
+      response.subscribe({
+        next: res => {
+          this.setTokens({ accessToken: res.accessToken, refreshToken: res.refreshToken });
+          this.router.navigate(['/']);
+          subscriber.next(res);
+        },
+        error: err => subscriber.error(err),
       });
     });
   }

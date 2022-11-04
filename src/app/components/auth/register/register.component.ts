@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,20 +8,31 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  @Output() registered: EventEmitter<void> = new EventEmitter<void>();
   name: string = '';
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
 
-  constructor(private readonly authService: AuthService) { }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit(): void {
   }
 
   onRegister() {
     this.authService.register(this.name, this.email, this.password, this.confirmPassword).subscribe({
-      next: res => console.log('Success:', res),
-      error: err => console.error('Fail:', err),
+      next: () => {
+        this.name = '';
+        this.email = '';
+        this.password = '';
+        this.confirmPassword = '';
+        this.snackBar.open('Successful registration', 'OK');
+        this.registered.emit();
+      },
+      error: err => this.snackBar.open(err.error, 'OK', { duration: 5000 }),
     });
   }
 

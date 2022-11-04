@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,14 +11,17 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor(private readonly authService: AuthService) { }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit(): void {
   }
 
   onLogin() {
     this.authService.login(this.email, this.password).subscribe({
-      error: err => console.error('Fail:', err),
+      error: err => this.snackBar.open(err.error, 'OK', { duration: 5000 }),
     });
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
 
@@ -18,6 +19,7 @@ export class EditCourseComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly courseService: CourseService,
+    private readonly snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -43,8 +45,9 @@ export class EditCourseComponent implements OnInit {
       deadline: this.deadline,
       name: this.name,
       studentEmails: this.studentEmails
-    }).subscribe(res => {
-      this.router.navigate(['course', res.id]);
+    }).subscribe({
+      next: res => this.router.navigate(['course', res.id]),
+      error: err => this.snackBar.open(err.error, 'OK', { duration: 5000 }),
     });
   }
 

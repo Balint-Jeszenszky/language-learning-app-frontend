@@ -60,3 +60,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .text-right {
   text-align: right;
 }
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  zoom: 0.5;
+  margin: 2rem;
+}

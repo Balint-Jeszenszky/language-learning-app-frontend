@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
 import { WordPair } from 'src/app/services/types';
@@ -11,12 +12,13 @@ import { WordPairService } from 'src/app/services/word-pair.service';
 })
 export class EditWordsComponent implements OnInit {
   id?: number;
-  wordPairs: WordPair[] = [];
+  wordPairs?: WordPair[];
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly wordPairService: WordPairService,
+    private readonly snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -28,15 +30,15 @@ export class EditWordsComponent implements OnInit {
 
   remove(wordPair: WordPair) {
     window.confirm(`Do you want to remove "${wordPair.word}"`)
-    const index = this.wordPairs.indexOf(wordPair);
+    const index = this.wordPairs?.indexOf(wordPair) ||-1;
 
     if (index >= 0) {
-      this.wordPairs.splice(index, 1);
+      this.wordPairs?.splice(index, 1);
     }
   }
 
   add() {
-    this.wordPairs.push({
+    this.wordPairs?.push({
       word: '',
       translation: '',
       metadata: [],
@@ -44,12 +46,13 @@ export class EditWordsComponent implements OnInit {
   }
 
   saveWordPairs() {
-    if (!this.id) {
+    if (!this.id || !this.wordPairs) {
       return;
     }
 
-    this.wordPairService.editWords(this.id, this.wordPairs).subscribe(() => {
-      this.router.navigate(['course', this.id]);
+    this.wordPairService.editWords(this.id, this.wordPairs).subscribe({
+      next: () => this.router.navigate(['course', this.id]),
+      error: err => this.snackBar.open(err.error, 'OK', { duration: 5000 }),
     });
   }
 

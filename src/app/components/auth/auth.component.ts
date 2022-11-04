@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
+  selectedTabIndex: number = 0;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  showLogin() {
+    this.selectedTabIndex = 0;
   }
 
 }

@@ -10,7 +10,7 @@ import { WordPairService } from 'src/app/services/word-pair.service';
   styleUrls: ['./course-details.component.css']
 })
 export class CourseDetailsComponent implements OnInit {
-  wordPairs: WordPair[] = [];
+  wordPairs?: WordPair[];
   courseDetails?: CourseDetails;
   displayedColumns: string[] = ['email'];
 

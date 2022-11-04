@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
 import { Course, CreateCourseRequest } from 'src/app/services/types';
@@ -12,12 +13,13 @@ import { NewCourseComponent } from './new-course/new-course.component';
 })
 export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['name', 'deadline', 'open'];
-  courses: Course[] = [];
+  courses?: Course[];
 
   constructor(
     private readonly router: Router,
     private readonly courseService: CourseService,
     private readonly dialog: MatDialog,
+    private readonly snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -41,8 +43,9 @@ export class HomeComponent implements OnInit {
         return;
       }
 
-      this.courseService.createCourse(result).subscribe(res => {
-        this.router.navigate(['course', res.id]);
+      this.courseService.createCourse(result).subscribe({
+        next: res => this.router.navigate(['course', res.id]),
+        error: err => this.snackBar.open(err.error, 'OK', { duration: 5000 }),
       });
     });
   }

@@ -1,4 +1,7 @@
 <h1>Edit words</h1>
+<div *ngIf="!wordPairs" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
 <div *ngFor="let wordPair of wordPairs">
   <div class="d-flex justify-between flex-wrap">
     <mat-form-field appearance="fill" class="half-input">
