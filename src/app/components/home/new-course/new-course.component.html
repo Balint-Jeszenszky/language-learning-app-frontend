@@ -4,6 +4,10 @@
     <mat-label>Course name</mat-label>
     <input matInput [(ngModel)]="name">
   </mat-form-field>
+  <mat-form-field class="w-100" appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput placeholder="Description" [(ngModel)]="description"></textarea>
+  </mat-form-field>
   <mat-form-field appearance="fill" class="w-100">
     <mat-label>Choose a deadline</mat-label>
     <input matInput [matDatepicker]="picker" [(ngModel)]="deadline">
@@ -14,5 +18,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button (click)="onNoClick()">Cancel</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="{ name, deadline }" cdkFocusInitial>Create</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="{ name, description, deadline }" cdkFocusInitial>Create</button>
 </div>

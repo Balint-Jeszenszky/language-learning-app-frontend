@@ -3,14 +3,15 @@
   <a mat-raised-button color="primary" routerLink="edit">Edit course</a>
 </div>
 <small>Deadline: {{ courseDetails?.deadline?.toLocaleDateString() || 'No deadline' }}</small>
+<p *ngFor="let line of courseDetails?.description?.split('\n')">{{ line }}</p>
 <div class="d-flex justify-between align-center">
   <h2>Word pairs</h2>
   <a mat-raised-button color="primary" routerLink="words/edit">Edit word pairs</a>
 </div>
-<div *ngIf="!courseDetails?.students?.length" class="no-data">
+<div *ngIf="!wordPairs.length" class="no-data">
   No word pairs
 </div>
-<div class="d-flex flex-wrap justify-around" *ngIf="courseDetails?.students?.length">
+<div class="d-flex flex-wrap justify-around" *ngIf="wordPairs.length">
   <mat-card *ngFor="let wordPair of wordPairs" class="m-1 card">
       <mat-card-header>
         <mat-card-title>{{ wordPair.word }} - {{ wordPair.translation }}</mat-card-title>

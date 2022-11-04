@@ -8,6 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class NewCourseComponent implements OnInit {
   name: string = '';
+  description: string = '';
   deadline?: Date = undefined;
 
   constructor(private readonly dialogRef: MatDialogRef<NewCourseComponent>) { }

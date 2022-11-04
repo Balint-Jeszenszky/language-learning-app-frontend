@@ -40,6 +40,7 @@ export type TokenPayload = {
 export type Course = {
   id: number;
   name: string;
+  description: string;
   deadline?: Date;
   teacher: {
     id: number;
@@ -56,12 +57,14 @@ export type WordPair = {
 
 export type CreateCourseRequest = {
   name: string;
+  description: string;
   deadline?: Date;
 }
 
 export type CreateCourseResponse = {
   id: number;
   name: string;
+  description: string;
   deadline?: Date;
   teacher: {
     id: number;
@@ -72,6 +75,7 @@ export type CreateCourseResponse = {
 export type EditCourseRequest = {
   id: number;
   name: string;
+  description: string;
   deadline?: Date;
   studentEmails: string[];
 }
@@ -79,6 +83,7 @@ export type EditCourseRequest = {
 export type CourseDetails = {
   id: number;
   name: string;
+  description: string;
   deadline?: Date;
   students: string[];
 }

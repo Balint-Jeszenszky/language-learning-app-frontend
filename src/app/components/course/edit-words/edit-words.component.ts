@@ -39,7 +39,7 @@ export class EditWordsComponent implements OnInit {
       word: '',
       translation: '',
       metadata: [],
-    })
+    });
   }
 
   saveWordPairs() {
