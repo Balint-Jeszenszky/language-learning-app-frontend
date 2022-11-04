@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
 import { WordPair } from 'src/app/services/types';
+import { WordPairService } from 'src/app/services/word-pair.service';
 
 @Component({
   selector: 'app-edit-words',
@@ -15,13 +16,13 @@ export class EditWordsComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly courseService: CourseService,
+    private readonly wordPairService: WordPairService,
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
-      this.courseService.getWordPairsByCourse(this.id).subscribe(wordPairs => this.wordPairs = wordPairs);
+      this.wordPairService.getWordPairsByCourse(this.id).subscribe(wordPairs => this.wordPairs = wordPairs);
     });
   }
 
@@ -47,7 +48,7 @@ export class EditWordsComponent implements OnInit {
       return;
     }
 
-    this.courseService.editWords(this.id, this.wordPairs).subscribe(() => {
+    this.wordPairService.editWords(this.id, this.wordPairs).subscribe(() => {
       this.router.navigate(['course', this.id]);
     });
   }
