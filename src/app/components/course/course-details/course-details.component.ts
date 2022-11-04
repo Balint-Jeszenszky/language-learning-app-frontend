@@ -12,7 +12,7 @@ import { WordPairService } from 'src/app/services/word-pair.service';
 export class CourseDetailsComponent implements OnInit {
   wordPairs?: WordPair[];
   courseDetails?: CourseDetails;
-  displayedColumns: string[] = ['email'];
+  displayedColumns: string[] = ['name', 'email', 'score'];
 
   constructor(
     private readonly route: ActivatedRoute,

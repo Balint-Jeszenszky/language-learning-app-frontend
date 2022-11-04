@@ -29,7 +29,7 @@ export class EditCourseComponent implements OnInit {
         this.name = res.name;
         this.deadline = res.deadline;
         this.description = res.description;
-        this.studentEmails = res.students;
+        this.studentEmails = res.students.map(s => s.email);
       });
     });
   }
