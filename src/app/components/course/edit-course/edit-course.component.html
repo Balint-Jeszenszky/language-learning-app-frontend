@@ -24,6 +24,7 @@
   </div>
 </div>
 <div class="d-flex justify-end">
+  <button mat-raised-button color="warn" (click)="deleteCourse()">Delete</button>
   <a mat-raised-button [routerLink]="'/course/' + id" class="mx-05">Cancel</a>
   <button mat-raised-button color="primary" (click)="saveCourse()">Save</button>
 </div>

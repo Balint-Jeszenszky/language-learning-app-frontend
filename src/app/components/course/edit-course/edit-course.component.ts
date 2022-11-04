@@ -51,4 +51,14 @@ export class EditCourseComponent implements OnInit {
     });
   }
 
+  deleteCourse() {
+    if (!this.id || !confirm(`Are you sure you want to delete "${this.name}" course?`)) {
+      return;
+    }
+
+    this.courseService.deleteCourse(this.id).subscribe(res => {
+      this.router.navigate(['/']);
+    });
+  }
+
 }

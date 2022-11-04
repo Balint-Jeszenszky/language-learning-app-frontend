@@ -25,4 +25,8 @@ export class CourseService {
   editCourse(payload: EditCourseRequest): Observable<CreateCourseResponse> {
     return this.http.put<CreateCourseResponse>('/api/course', payload);
   }
+
+  deleteCourse(id: number): Observable<void> {
+    return this.http.delete<void>(`/api/course/${id}`);
+  }
 }
