@@ -9,3 +9,16 @@
   border-radius: 4px;
   padding: 1rem;
 }
+
+.detail-row {
+  height: 0;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  padding-bottom: 0.5rem;
+}

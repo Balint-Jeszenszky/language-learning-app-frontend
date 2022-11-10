@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Course, CourseDetails, CreateCourseRequest, CreateCourseResponse, EditCourseRequest } from './types';
+import { Course, CourseDetails, CreateCourseRequest, CreateCourseResponse, EditCourseRequest, Submission } from './types';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,10 @@ export class CourseService {
 
   getCourseDetailsById(id: number): Observable<CourseDetails> {
     return this.http.get<CourseDetails>(`/api/course/teacher/${id}`);
+  }
+
+  getUserSubmissions(courseId: number, studentId: number): Observable<Submission[]> {
+    return this.http.get<Submission[]>(`/api/course/${courseId}/student/${studentId}`);
   }
 
   createCourse(payload: CreateCourseRequest): Observable<CreateCourseResponse> {

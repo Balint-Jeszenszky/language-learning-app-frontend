@@ -80,7 +80,7 @@ export type EditCourseRequest = {
   metadata: string[];
 }
 
-export type Studnet = {
+export type Student = {
   id: number;
   name: string;
   email: string;
@@ -92,6 +92,12 @@ export type CourseDetails = {
   name: string;
   description: string;
   deadline?: Date;
-  students: Studnet[];
+  students: Student[];
   metadata: string[];
+}
+
+export type Submission= {
+  id: number;
+  score: number;
+  submittedAt: Date;
 }

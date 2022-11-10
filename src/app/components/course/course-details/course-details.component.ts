@@ -1,20 +1,31 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Chart from 'chart.js/auto';
 import { CourseService } from 'src/app/services/course.service';
-import { CourseDetails, WordPair } from 'src/app/services/types';
+import { CourseDetails, Student, Submission, WordPair } from 'src/app/services/types';
 import { WordPairService } from 'src/app/services/word-pair.service';
 
 @Component({
   selector: 'app-course-details',
   templateUrl: './course-details.component.html',
-  styleUrls: ['./course-details.component.css']
+  styleUrls: ['./course-details.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class CourseDetailsComponent implements OnInit {
   wordPairs?: WordPair[];
   courseDetails?: CourseDetails;
   displayedColumns: string[] = ['name', 'email', 'score'];
+  displayedColumnsWithExpand = [...this.displayedColumns, 'expand'];
   chart?: Chart;
+  expandedElement?: Student;
+  submissions?: Submission[];
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -25,7 +36,10 @@ export class CourseDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const courseId = +params['id'];
-      this.wordPairService.getWordPairsByCourse(courseId).subscribe(wordPairs => this.wordPairs = wordPairs);
+      this.wordPairService.getWordPairsByCourse(courseId).subscribe(wordPairs => {
+        this.wordPairs = wordPairs;
+        this.createChart();
+      });
       this.courseService.getCourseDetailsById(courseId).subscribe(courseDetails => {
         if (courseDetails.deadline) {
           courseDetails.deadline = new Date(courseDetails.deadline);
@@ -36,6 +50,16 @@ export class CourseDetailsComponent implements OnInit {
     });
   }
 
+  selectRow(element: Student) {
+    this.expandedElement = this.expandedElement === element ? undefined : element;
+    if (this.courseDetails?.id && this.expandedElement) {
+      this.courseService.getUserSubmissions(this.courseDetails.id, this.expandedElement.id).subscribe(submissions => {
+        submissions.forEach(s => s.submittedAt = new Date(s.submittedAt));
+        this.submissions = submissions;
+      });
+    }
+  }
+
   createChart() {
     if (!this.wordPairs) {
       return;
@@ -43,7 +67,7 @@ export class CourseDetailsComponent implements OnInit {
 
     const scores = new Array(this.wordPairs.length + 1).fill(0);
     this.courseDetails?.students.forEach(s => {
-      scores[s.score || 0]++;
+      if (s.score) scores[s.score]++;
     });
 
     this.chart = new Chart("score", {
