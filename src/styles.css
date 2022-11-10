@@ -16,6 +16,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 1rem;
 }
 
+.my-1 {
+  margin: 1rem 0;
+}
+
 .mb-2 {
   margin-bottom: 1rem;
 }

@@ -14,6 +14,7 @@ export class EditCourseComponent implements OnInit {
   description: string = '';
   deadline?: Date = undefined;
   studentEmails: string[] = [];
+  metadata: string[] = [];
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -30,6 +31,7 @@ export class EditCourseComponent implements OnInit {
         this.deadline = res.deadline;
         this.description = res.description;
         this.studentEmails = res.students.map(s => s.email);
+        this.metadata = res.metadata;
       });
     });
   }
@@ -44,7 +46,8 @@ export class EditCourseComponent implements OnInit {
       description: this.description,
       deadline: this.deadline,
       name: this.name,
-      studentEmails: this.studentEmails
+      studentEmails: this.studentEmails,
+      metadata: this.metadata,
     }).subscribe({
       next: res => this.router.navigate(['course', res.id]),
       error: err => this.snackBar.open(err.error, 'OK', { duration: 5000 }),

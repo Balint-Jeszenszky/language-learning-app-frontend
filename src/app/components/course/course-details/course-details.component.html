@@ -3,6 +3,11 @@
   <a mat-raised-button color="primary" routerLink="edit">Edit course</a>
 </div>
 <small>Deadline: {{ courseDetails?.deadline?.toLocaleDateString() || 'No deadline' }}</small>
+<div class="my-1">
+  <mat-chip-list aria-label="Metadata">
+    <mat-chip *ngFor="let metadata of courseDetails?.metadata">{{ metadata }}</mat-chip>
+  </mat-chip-list>
+</div>
 <p *ngFor="let line of courseDetails?.description?.split('\n')">{{ line }}</p>
 <div class="d-flex justify-between align-center">
   <h2>Word pairs</h2>
@@ -19,11 +24,6 @@
       <mat-card-header>
         <mat-card-title>{{ wordPair.word }} - {{ wordPair.translation }}</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
-        <mat-chip-list aria-label="Fish selection">
-          <mat-chip *ngFor="let metadata of wordPair.metadata">{{ metadata }}</mat-chip>
-        </mat-chip-list>
-      </mat-card-content>
     </mat-card>
 </div>
 <h2>Students</h2>

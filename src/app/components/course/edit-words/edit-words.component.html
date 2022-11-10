@@ -13,9 +13,6 @@
       <input matInput [(ngModel)]="wordPair.translation">
     </mat-form-field>
   </div>
-  <div>
-    <app-chip-input label="Metadata" placeholder="New metadata..." [data]="wordPair.metadata"></app-chip-input>
-  </div>
   <div class="text-right">
     <button mat-icon-button color="warn" aria-label="Remove word" (click)="remove(wordPair)">
       <mat-icon>delete</mat-icon>

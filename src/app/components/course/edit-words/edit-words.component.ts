@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CourseService } from 'src/app/services/course.service';
 import { WordPair } from 'src/app/services/types';
 import { WordPairService } from 'src/app/services/word-pair.service';
 
@@ -41,7 +40,6 @@ export class EditWordsComponent implements OnInit {
     this.wordPairs?.push({
       word: '',
       translation: '',
-      metadata: [],
     });
   }
 

@@ -52,7 +52,6 @@ export type WordPair = {
   id?: number;
   word: string;
   translation: string;
-  metadata: string[];
 }
 
 export type CreateCourseRequest = {
@@ -78,6 +77,7 @@ export type EditCourseRequest = {
   description: string;
   deadline?: Date;
   studentEmails: string[];
+  metadata: string[];
 }
 
 export type Studnet = {
@@ -93,4 +93,5 @@ export type CourseDetails = {
   description: string;
   deadline?: Date;
   students: Studnet[];
+  metadata: string[];
 }
