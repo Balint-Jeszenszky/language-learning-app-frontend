@@ -50,3 +50,7 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<h2>Statistics</h2>
+<div>
+  <canvas id="score" >{{ chart }}</canvas>
+</div>
