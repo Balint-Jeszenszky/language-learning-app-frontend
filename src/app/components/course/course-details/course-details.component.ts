@@ -51,6 +51,7 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   selectRow(element: Student) {
+    this.submissions = undefined;
     this.expandedElement = this.expandedElement === element ? undefined : element;
     if (this.courseDetails?.id && this.expandedElement) {
       this.courseService.getUserSubmissions(this.courseDetails.id, this.expandedElement.id).subscribe(submissions => {
@@ -61,7 +62,7 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   createChart() {
-    if (!this.wordPairs) {
+    if (!this.wordPairs || !this.courseDetails) {
       return;
     }
 
