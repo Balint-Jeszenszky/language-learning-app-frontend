@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
+  hasStudentAccount: boolean = false;
 
   constructor(
     private readonly authService: AuthService,
@@ -23,7 +24,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister() {
-    this.authService.register(this.name, this.email, this.password, this.confirmPassword).subscribe({
+    this.authService.register(this.name, this.email, this.password, this.confirmPassword, this.hasStudentAccount).subscribe({
       next: () => {
         this.name = '';
         this.email = '';

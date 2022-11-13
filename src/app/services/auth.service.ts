@@ -1,10 +1,12 @@
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, ReplaySubject } from 'rxjs';
 import { LoginResponse, TokenPayload, Tokens, UserDetails } from './types';
 
 const TOKEN_KEY = 'tokens';
+const TEACHER = 'ROLE_TEACHER';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,7 @@ export class AuthService {
 
   constructor(
     private readonly router: Router,
+    private readonly snackBar: MatSnackBar,
     httpBackend: HttpBackend,
   ) {
     this.loggedIn.next(false);
@@ -58,8 +61,8 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
-  register(name: string, email: string, password: string, confirmPassword: string): Observable<UserDetails> {
-    return this.http.post<UserDetails>('/api/auth/register', { name, email, password, confirmPassword });
+  register(name: string, email: string, password: string, confirmPassword: string, hasStudentAccount: boolean): Observable<UserDetails> {
+    return this.http.post<UserDetails>('/api/auth/register', { name, email, password, confirmPassword, hasStudentAccount });
   }
 
   getAccessToken(): string | undefined {
@@ -72,10 +75,20 @@ export class AuthService {
     localStorage.removeItem(TOKEN_KEY);
     this.tokens = undefined;
     this.router.navigate(['/auth']);
+
+    if (!refreshToken) {
+      return;
+    }
+
     this.http.post<void>('/api/auth/logout', { refreshToken }).subscribe();
   }
 
   private setTokens(tokens: Tokens): void {
+    if (!this.hasTeacherRole(tokens.accessToken)) {
+      this.logout();
+      this.snackBar.open('Cannot login without a teacher account', 'OK', { duration: 5000 });
+      return;
+    }
     this.tokens = tokens;
     this.loggedIn.next(true);
     const expiration = this.getTokenPayload(tokens.accessToken).exp * 1000;
@@ -103,9 +116,13 @@ export class AuthService {
   }
 
   private isExpired(token: string): boolean {
-    const payload = token.split('.')[1];
-    const parsed = JSON.parse(window.atob(payload));
-    const expiration = parsed.exp * 1000;
+    const payload =  this.getTokenPayload(token);
+    const expiration = payload.exp * 1000;
     return new Date(expiration) < new Date();
+  }
+
+  private hasTeacherRole(token: string): boolean {
+    const payload = this.getTokenPayload(token);
+    return payload.roles.some(r => r === TEACHER);
   }
 }

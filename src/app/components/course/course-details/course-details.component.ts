@@ -66,9 +66,12 @@ export class CourseDetailsComponent implements OnInit {
       return;
     }
 
-    const scores = new Array(this.wordPairs.length + 1).fill(0);
+    const words = this.wordPairs.length;
+    const scores = new Array(words + 1).fill(0);
     this.courseDetails?.students.forEach(s => {
-      if (s.score) scores[s.score]++;
+      if (Number.isInteger(s.score)) {
+        scores[Math.min(s.score!, words)]++;
+      }
     });
 
     this.chart = new Chart("score", {
