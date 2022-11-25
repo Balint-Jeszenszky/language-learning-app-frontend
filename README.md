@@ -1,3 +1,12 @@
+# Language learning app frontend
+
+Homework for BME VIK AUT Software Architectures (VIAUMA06)
+
+Backend: https://github.com/Balint-Jeszenszky/language-learning-app-backend
+
+Android client (for students): https://github.com/Feketerig/Language_learner
+
+
 # LanguageLearningAppFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
